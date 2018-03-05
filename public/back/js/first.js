@@ -57,16 +57,19 @@ $(function(){
             data:$form.serialize(),
             success:function(info){
                 console.log(info);
+            if(info.success){
+                $("#addModal").modal("hide");
+                currentPage:1;
+                render();
+
+                //把模态框中的数据重置
+                $form.data("bootstrapValidator").resetForm();
+                //$form是一个JQuery对象，没有reset方法
+                //但是dom对象有reset方法，所以需要把form这个对象取出来，才能调用reset方法
+                $form[0].reset();
+            }
             }
 
         })
     });
-
-
-
-
-    })
-
-
-
-})
+    });
